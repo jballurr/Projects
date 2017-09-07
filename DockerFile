@@ -1,3 +1,0 @@
-FROM niginx
-COPY UIRestEasyAPI
-EXPOSE 80
