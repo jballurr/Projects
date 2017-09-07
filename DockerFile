@@ -1,3 +1,3 @@
 FROM niginx
-COPY UIRestEasyAPI ./tmp/ASRestAPIv4
+COPY UIRestEasyAPI
 EXPOSE 80
