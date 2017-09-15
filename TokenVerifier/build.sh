@@ -1,4 +1,4 @@
-echo Building alexellis2/href-counter:build
+echo Building asrestapp:build
 
 sudo docker build -t asrestapp:build . -f Dockerfile.build
 
