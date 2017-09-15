@@ -1,0 +1,868 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<server xmlns="urn:jboss:domain:1.7">
+
+    <extensions>
+        <extension module="org.jboss.as.clustering.infinispan"/>
+        <extension module="org.jboss.as.connector"/>
+        <extension module="org.jboss.as.deployment-scanner"/>
+        <extension module="org.jboss.as.ee"/>
+        <extension module="org.jboss.as.ejb3"/>
+        <extension module="org.jboss.as.jaxrs"/>
+        <extension module="org.jboss.as.jdr"/>
+        <extension module="org.jboss.as.jmx"/>
+        <extension module="org.jboss.as.jpa"/>
+        <extension module="org.jboss.as.jsf"/>
+        <extension module="org.jboss.as.logging"/>
+        <extension module="org.jboss.as.mail"/>
+        <extension module="org.jboss.as.naming"/>
+        <extension module="org.jboss.as.pojo"/>
+        <extension module="org.jboss.as.remoting"/>
+        <extension module="org.jboss.as.sar"/>
+        <extension module="org.jboss.as.security"/>
+        <extension module="org.jboss.as.threads"/>
+        <extension module="org.jboss.as.transactions"/>
+        <extension module="org.jboss.as.web"/>
+        <extension module="org.jboss.as.webservices"/>
+        <extension module="org.jboss.as.weld"/>
+        <extension module="org.wildfly.extension.camel"/>
+        <extension module="org.switchyard"/>
+    </extensions>
+
+    <system-properties>
+        <property name="APINAME_TO_MSGNAME_MAPPINGLIST" value="ESDReq=EndOfServiceDocumentMsg,EquipmentSwapReq=EquipmentSwapRequestMsg,ReleaseOrderReq=ReleaseOrderReq"/>
+        <property name="wwnms_part_url_tokens_string" value="vsats;beams"/>
+        <property name="wwnms_var_tokens_string" value="beamId"/>
+        <property name="hawtio.authenticationEnabled" value="true"/>
+        <property name="hawtio.offline" value="true"/>
+        <property name="hawtio.realm" value="hawtio-domain"/>
+        <property name="esb.log.mask.list" value="PaymentAcctNumber,SSN,CVV,CreditCardSecureCd,DOB"/>
+        <property name="CreateOrderProcessForVARSyncProxy.socket.timeout" value="120000"/>
+        <property name="CreateExistingCustomerOrderProxyService.mask.list" value="CVV:1^SSN:1"/>
+        <property name="replace_bpmwsserverschema" value="xmlns=&quot;http://bpmwsserver:19086/schema/&quot;^"/>
+        <property name="nonamespace" value="xmlns=&quot;http://com.hughes.bits.managetransaction&quot;^"/>
+        <property name="ns0namespace" value="xmlns:ns0=&quot;http://com.hughes.bits.managetransaction&quot;^"/>
+        <property name="MsgControllerACSProxy.proxy.endpoint" value="http://10.100.8.140:8087/DSS_Simulator/MsgControllerService"/>
+        <property name="MsgControllerVISIONProxy.proxy.endpoint" value="http://10.100.8.140:8087/DSS_Simulator/MsgControllerService"/>
+        <property name="MsgControllerBFWProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerBFWProxy.proxy.endpoint" value="http://orderings1.iaglab.com/public/http/SAGE/SFShipmentDeliveryNotificationProxy"/>
+        <property name="MsgControllerCMProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerCMProxy.proxy.endpoint" value="http://jdssserver:8180/cm/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerCRMISProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerCRMISProxy.proxy.endpoint" value="http://wldssserver:7003/crmis/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerCSPProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerEBOProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerEBOProxy.proxy.endpoint" value="http://jdssserver:8180/ebo/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerESMProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerESMProxy.proxy.endpoint" value="http://wldssserver:7003/esm/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerKAASProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerKAASProxy.proxy.endpoint" value="http://jdssserver:8086/kaas/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerKUASProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerKUASProxy.proxy.endpoint" value="http://jdssserver:8180/kuas/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerPPSProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerPPSProxy.proxy.endpoint" value="http://jdssserver:8180/pps/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerRDMProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerRDMProxy.proxy.endpoint" value="http://wldssserver:7003/rdm/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSMProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSMProxy.proxy.endpoint" value="http://wldssserver:7003/sm/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSOAADAPTERProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSOAADAPTERProxy.proxy.endpoint" value="http://pcijmsserver:7000/soaadapterapp/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerULMProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerULMProxy.proxy.endpoint" value="http://jdssserver:8180/acapulco/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerBMRProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerBMRProxy.proxy.endpoint" value="http://pcibillingserver:8080/SDS/BFW/MsgControllerService"/>
+        <property name="MsgControllerBAProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerBAProxy.proxy.endpoint" value="http://jdssserver:8180/ba/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerEPUProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerEPUProxy.proxy.endpoint" value="http://jdssserver:8180/epu/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSSCMProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSSCMProxy.proxy.endpoint" value="http://jdssserver:8086/sscm/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerCBRProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerCBRProxy.proxy.endpoint" value="http://jdssserver:8086/sdcs/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerJUASProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerJUASProxy.proxy.endpoint" value="http://jdssserver:8180/juas/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerIPAMProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerIPAMProxy.proxy.endpoint" value="http://jdssserver:8086/ipam/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSPQJUASProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSPQJUASProxy.proxy.endpoint" value="http://jdssserver:8180/juas/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSPQSMProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSPQSMProxy.proxy.endpoint" value="http://jdssserver:8180/sm/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSPQCRMISProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSPQCRMISProxy.proxy.endpoint" value="http://jdssserver:8180/crmis/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSPQCMProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSPQCMProxy.proxy.endpoint" value="http://jdssserver:8180/cm/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSPQRDMProxy.proxy.timeout" value="120000"/>
+        <property name="CommonBillingEXTProxy.proxy.endpoint" value="http://pcibillingserver:8080/bfw-CSP_BFWEJB/BillingServiceImpl"/>
+        <property name="BillingCustomerEXTProxy.endpoint" value="http://pcibillingserver:8080/bfw-CSP_BR_BFW_EJB/BillingCustomerServiceImpl"/>
+        <property name="MsgControllerSPQRDMProxy.proxy.endpoint" value="http://jdssserver:8180/rdm/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSPQKUASProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSPQKUASProxy.proxy.endpoint" value="http://jdssserver:8180/kuas/MsgControllerService/MsgControllerService11"/>
+        <property name="MsgControllerSPQKAASProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSPQKAASProxy.proxy.endpoint" value="http://jdssserver:8086/kaas/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSPQULMProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSPQULMProxy.proxy.endpoint" value="http://jdssserver:8180/acapulco/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerSPQBAProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSPQBAProxy.proxy.endpoint" value="http://jdssserver:8180/ba/MsgControllerService/MsgControllerService"/>
+        <property name="ESB_SALESFORCE_HOST" value="https://cs18.salesforce.com"/>
+        <property name="ESB_SALESFORCE_USERNAME" value="esbapiuser@sage.com.hssitdev"/>
+        <property name="ESB_SALESFORCE_PASSWORD" value="SHVnaGVzIzEyMw=="/>
+        <property name="ESB_SALESFORCE_CLIENTID" value="3MVG98RqVesxRgQ7lMyIeZtXzRXkDzfKqYv4sNnbBLTxHo9fo05Xnc84_VKLs8URBtwH.q_WAjAxeuNY0XNE7"/>
+        <property name="ESB_SALESFORCE_CLIENTSECRET" value="5019900859830926485"/>
+        <property name="SFShipmentDeliveryNotificationProxy.proxy.endpoint" value="https://cs18.salesofrce.com/services/Soap/class/ShipmentDeliveryNotification"/>
+        <property name="CONNECT_SALESFORCE" value="true"/>
+        <property name="HMTUpdateAccountStatusProxy.proxy.endpoint" value="https://hmtserver.iaglab.com/HMTAPI/V1/useraccount/update"/>
+        <property name="sapusername" value="WSDL_RFC"/>
+        <property name="sappassword" value="1tsT@ngl3d"/>
+        <property name="esb.security.keyfile.location" value="/opt/pop/conf/key.dat"/>
+        <property name="esb.security.encryption.algorithm" value="DES"/>
+        <property name="csp.http.billing.socket.timeout" value="120000"/>
+        <property name="MsgControllerNPCICBFWProxy.proxy.endpoint" value="http://www.google.com"/>
+        <property name="MsgControllerPCICBFWProxy.proxy.endpoint" value="http://www.google.com"/>
+        <property name="MsgControllerCSPProxy.proxy.endpoint" value="http://cspwsserver:8080/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerCSPProxy.endpoint" value="http://cspwsserver:8080/MsgControllerService/MsgControllerService"/>
+        <property name="MsgControllerAsyncCRMISProxy.throttle.count" value="100"/>
+        <property name="MsgControllerIPAMProxy.throttle.count" value="100"/>
+        <property name="MsgControllerAsyncKAASProxy.throttle.count" value="100"/>
+        <property name="CSP/MsgControllerCSPProxy.throttle.count" value="100"/>
+        <property name="MsgControllerSMProxy.throttle.count" value="100"/>
+        <property name="MsgControllerCRMISProxy.throttle.count" value="100"/>
+        <property name="MsgControllerCMProxy.throttle.count" value="100"/>
+        <property name="MsgControllerESMProxy.throttle.count" value="100"/>
+        <property name="MsgControllerPPSProxy.throttle.count" value="100"/>
+        <property name="MsgControllerRDMProxy.throttle.count" value="100"/>
+        <property name="MsgControllerBAProxy.throttle.count" value="100"/>
+        <property name="HMTUpdateAccountStatusProxy.proxy.timeout" value="10000"/>
+        <property name="MsgControllerBATopicProxy.throttle.count" value="100"/>
+        <property name="MsgControllerBFWProxy.throttle.count" value="100"/>
+        <property name="MsgControllerCBRProxy.throttle.count" value="100"/>
+        <property name="MsgControllerCMTopicProxy.throttle.count" value="100"/>
+        <property name="MsgControllerEBOProxy.throttle.count" value="100"/>
+        <property name="MsgControllerEPUProxy.throttle.count" value="100"/>
+        <property name="MsgControllerESMTopicProxy.throttle.count" value="100"/>
+        <property name="MsgControllerJUASProxy.throttle.count" value="100"/>
+        <property name="HMTUpdateAccountStatusProxy.thread.count" value="10"/>
+        <property name="MsgControllerKUASProxy.throttle.count" value="100"/>
+        <property name="MsgControllerKAASProxy.throttle.count" value="100"/>
+        <property name="MsgControllerRDMTopicProxy.throttle.count" value="100"/>
+        <property name="MsgControllerSOAADAPTERProxy.throttle.count" value="100"/>
+        <property name="MsgControllerSSCMProxy.throttle.count" value="100"/>
+        <property name="MsgControllerULMProxy.throttle.count" value="100"/>
+        <property name="MsgControllerBMRProxy.throttle.count" value="100"/>
+        <property name="MsgControllerNPCICBFWProxy.throttle.count" value="100"/>
+        <property name="MsgControllerPCICBFWProxy.throttle.count" value="100"/>
+        <property name="MsgControllerSSCMTopicProxy.throttle.count" value="100"/>
+        <property name="MsgControllerAsyncCRMISProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerIPAMProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerAsyncKAASProxy.throttle.timeout" value="20000"/>
+        <property name="CSP/MsgControllerCSPProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerSMProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerCRMISProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerCMProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerESMProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerPPSProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerRDMProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerBAProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerBATopicProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerBFWProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerCBRProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerCMTopicProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerEBOProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerEPUProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerESMTopicProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerJUASProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerKUASProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerKAASProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerRDMTopicProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerSOAADAPTERProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerSSCMProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerULMProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerBMRProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerNPCICBFWProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerPCICBFWProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerSSCMTopicProxy.throttle.timeout" value="20000"/>
+        <property name="MsgControllerCSPProxy.throttle.count" value="100"/>
+        <property name="SFUpdateAccountStatusProxy.proxy.timeout" value="120000"/>
+        <property name="SFUpdateAccountStatusProxy.thread.count" value="10"/>
+        <property name="SFCaseCreationCRMProxy.thread.count" value="10"/>
+        <property name="SFCaseCreationCRMProxy.proxy.timeout" value="10000"/>
+        <property name="CancelOrderProcessSyncProxy.socket.timeout" value="120000"/>
+        <property name="UpgradeOrderProcessSyncProxy.socket.timeout" value="120000"/>
+        <property name="ModifyOrderProcessProxy.socket.timeout" value="120000"/>
+        <property name="CreateOrderProcessSyncProxy.socket.timeout" value="120000"/>
+        <property name="UpfrontChargeProcessSyncProxy.socket.timeout" value="120000"/>
+        <property name="CancelOrderSyncProxy.proxy.timeout" value="120000"/>
+        <property name="CancelOrderSyncProxy.thread.count" value="50"/>
+        <property name="UpgradeOrderSyncProxy.proxy.timeout" value="120000"/>
+        <property name="UpgradeOrderSyncProxy.thread.count" value="25"/>
+        <property name="ModifyOrderSyncProxy.proxy.timeout" value="120000"/>
+        <property name="ModifyOrderSyncProxy.thread.count" value="25"/>
+        <property name="CreateOrderProxy.proxy.timeout" value="120000"/>
+        <property name="CreateOrderProxy.thread.count" value="25"/>
+        <property name="CreateOrderForVARSyncProxy.proxy.timeout" value="120000"/>
+        <property name="CreateOrderForVARSyncProxy.thread.count" value="25"/>
+        <property name="csp.http.socket.timeout" value="120000"/>
+        <property name="createordersync.schema.replace" value="=http://com.hughes.bits.createordermsg^http://bpmwsserver:19086/teamworks/webservices/SDSORD4/ConsumerCreateOrderSync.tws"/>
+        <property name="HMTServer.username" value="hmtapiuser"/>
+        <property name="HMTServer.password" value="Test@12345"/>
+        <property name="jsse.enableSNIExtension" value="false"/>
+        <property name="disableCNCheck" value="true"/>
+        <property name="org.jboss.security.ignoreHttpsHost" value="true"/>
+        <property name="cancelordersync.managetransaction.schema.replace" value="=http://bpmwsserver:19086/teamworks/webservices/OCT/OrderCancelWSSync.tws^http://com.hughes.bits.managetransaction"/>
+        <property name="cancelordersync.schema.replace" value="http://com.hughes.bits.cancelordermsg^http://bpmwsserver:19086/teamworks/webservices/OCT/OrderCancelWSSync.tws"/>
+        <property name="createorderspvarsync.schema.replace" value="http://com.hughes.bits.createordermsg^http://bpmwsserver:19086/teamworks/webservices/VARORD/VARSPCreateOrderSync.tws"/>
+        <property name="createorderspvarsync.managetransaction.schema.replace" value="http://bpmwsserver:19086/teamworks/webservices/VARORD/VARSPCreateOrderSync.tws^http://com.hughes.bits.managetransaction"/>
+        <property name="upgradeordersync.managetransaction.schema.replace" value="http://bpmwsserver:19086/teamworks/webservices/CONUPG/ConsumerUpgradeOrderSync.tws^http://com.hughes.bits.managetransaction"/>
+        <property name="upgradeordersync.schema.replace" value="http://com.hughes.bits.upgradeordermsg^http://bpmwsserver:19086/teamworks/webservices/CONUPG/ConsumerUpgradeOrderSync.tws"/>
+        <property name="{hcdm.managetransaction.schema.replace" value="http://www.hughes.com/BITS/schema/CommonDataModel^http://com.hughes.bits.managetransaction"/>
+        <property name="tdm.managetransaction.schema.replace" value="http://www.hughes.com/BITS/schemas/HughesTransactionalDM^http://com.hughes.bits.managetransaction"/>
+        <property name="hcdm.EvaluateCreditReport.schema.replace" value="http://www.hughes.com/BITS/schema/CommonDataModel^http://bpmwsserver:19086/teamworks/webservices/SDSTRS/EvaluateCreditReport.tws"/>
+        <property name="tdm.EvaluateCreditReport.schema.replace" value="http://www.hughes.com/BITS/schemas/HughesTransactionalDM^http://bpmwsserver:19086/teamworks/webservices/SDSTRS/EvaluateCreditReport.tws"/>
+        <property name="hcdm.managetransaction.schema.replace" value="http://www.hughes.com/BITS/schema/CommonDataModel^http://com.hughes.bits.managetransaction"/>
+        <property name="schema.managetransaction.schema.replace" value="http://bpmwsserver:19086/schema/^http://com.hughes.bits.managetransaction"/>
+        <property name="createorderspvarsync.soapaction.name" value="http://bpmwsserver:19086/teamworks/webservices/VARORD/VARSPCreateOrderSync.tws/CreateOrderReq"/>
+        <property name="upgradeordersync.soapaction.name" value="http://bpmwsserver:19086/teamworks/webservices/CONUPG/ConsumerUpgradeOrderSync.tws/upgradeOrder"/>
+        <property name="cancelordersync.soapaction.name" value="http://bpmwsserver:19086/teamworks/webservices/OCT/OrderCancelWSSync.tws/InvokeCancelOrderReq"/>
+        <property name="createordersync.soapaction.name" value="http://bpmwsserver:19086/teamworks/webservices/SDSORD4/ConsumerCreateOrderSync.tws/CreateOrderReq"/>
+        <property name="modifyordersync.soapaction.name" value="http://bpmwsserver:19086/teamworks/webservices/CONMOD1/ConsumerModifyOrderSync.tws/ModifyOrderReq"/>
+        <property name="Modifyordersync.schema.replace" value="http://com.hughes.bits.modifyordermsg^http://bpmwsserver:19086/teamworks/webservices/CONMOD1/ConsumerModifyOrderSync.tws"/>
+        <property name="modifyordersync.managetransaction.schema.replace" value="http://bpmwsserver:19086/teamworks/webservices/CONMOD1/ConsumerModifyOrderSync.tws^http://com.hughes.bits.managetransaction"/>
+        <property name="hcdm.DeterminePrequalResponse.schema.replace" value="http://www.hughes.com/BITS/schema/CommonDataModel^http://bpmwsserver:19086/teamworks/webservices/SDSTRS/DeterminePrequalResponse.tws"/>
+        <property name="tdm.DeterminePrequalResponse.schema.replace" value="http://www.hughes.com/BITS/schemas/HughesTransactionalDM^http://bpmwsserver:19086/teamworks/webservices/SDSTRS/DeterminePrequalResponse.tws"/>
+        <property name="schema.DeterminePrequalResponse.schema.replace" value="http://bpmwsserver:19086/schema/^http://bpmwsserver:19086/teamworks/webservices/SDSTRS/DeterminePrequalResponse.tws"/>
+        <property name="sagedssnotification.soapaction.name" value="http://www.hughes.com/OrderNotification/OrderNotificationService/OrderNotificationReq"/>
+        <property name="schema.EvaluateCreditReport.schema.replace" value="http://bpmwsserver:19086/schema/^http://bpmwsserver:19086/teamworks/webservices/SDSTRS/EvaluateCreditReport.tws"/>
+        <property name="EvaluateCreditReportProxy.proxy.timeout" value="120000"/>
+        <property name="EvaluateCreditReportProxy.thread.count" value="100"/>
+        <property name="EvaluatePrequalWarningsTWProxy.proxy.timeout" value="120000"/>
+        <property name="EvaluatePrequalWarningsTWProxy.thread.count" value="100"/>
+        <property name="MangeSiteInfoProxy.timeout" value="120000"/>
+        <property name="MangeSiteInfoProxy.proxy.timeout" value="120000"/>
+        <property name="EmailValidationProxy.proxy.timeout" value="120000"/>
+        <property name="ESB_DEBUG_DB_PARM_LIST" value="SAN,T_ACCOUNT,DEVICE_ID,ST_NAME,PROTOCOL_ID,ORDER_ID,OrderNumber,OrderId,ProtocolId,DeviceId,SiteName"/>
+        <property name="ESB_DEBUG_DB_ATTRIBUTE_LIST" value="T_ACCOUNT,ORDER_ID,PROTOCOL_ID"/>
+        <property name="DATASOURCE" value="java:/DSSDataSource"/>
+        <property name="dss.datasource" value="java:/DSSDataSource"/>
+        <property name="crmupd.soapaction.name" value="&amp;quot;&amp;quot;"/>
+        <property name="MsgControllerSOAAdapterProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSOAAdapterProxy.proxy.endpoint" value="http://wldssserver:7002/soaadapter/MsgControllerService"/>
+        <property name="jdk.tls.disabledAlgorithms" value="SSLv2Hello, SSLv3, TLSv1"/>
+        <property name="BillingSpecDataProcessProxy.socket.timeout" value="120000"/>
+        <property name="BillingSpecDataProxy.proxy.timeout" value="120000"/>
+        <property name="BillingSpecDataProxy.thread.count" value="100"/>
+        <property name="sfdc.orderticket.timeout" value="120000"/>
+        <property name="RemoveCustomerLocationOrdersProcessProxy.proxy.timeout" value="120000"/>
+        <property name="RemoveCustomerLocationOrdersProcessProxy.thread.count" value="100"/>
+        <property name="MsgControllerCSPProxy.timeout" value="120000"/>
+        <property name="CMCProxy.socket.timeout" value="120000"/>
+        <property name="EmailNotificationProxy.proxy.timeout" value="120000"/>
+        <property name="EmailNotificationProxy.thread.count" value="25"/>
+        <property name="EmailNotificationCSPProxy.proxy.timeout" value="120000"/>
+        <property name="EmailNotificationCSPProxy.thread.count" value="25"/>
+        <property name="FetchCmnIfSvcDataProxy.proxy.timeout" value="120000"/>
+        <property name="FetchCmnIfSvcDataProxy.thread.count" value="25"/>
+        <property name="FAPTokenAllocationProxy.proxy.timeout" value="120000"/>
+        <property name="FAPTokenAllocationProxy.thread.count" value="25"/>
+        <property name="FetchCreditReportProxy.proxy.timeout" value="120000"/>
+        <property name="FetchCreditReportProxy.thread.count" value="25"/>
+        <property name="FetchCreditReportCSPProxy.proxy.timeout" value="120000"/>
+        <property name="FetchCreditReportCSPProxy.thread.count" value="25"/>
+        <property name="PrequalOrderHttpProxy.proxy.timeout" value="120000"/>
+        <property name="PrequalOrderHttpProxy.thread.count" value="25"/>
+        <property name="ServicePrequalProxy.proxy.timeout" value="120000"/>
+        <property name="ServicePrequalProxy.thread.count" value="25"/>
+        <property name="CMCProxy.proxy.timeout" value="120000"/>
+        <property name="CMCProxy.thread.count" value="25"/>
+        <property name="CustomerManagementCenterCSPProxy.proxy.timeout" value="120000"/>
+        <property name="CustomerManagementCenterCSPProxy.thread.count" value="25"/>
+        <property name="YahsatSLVTProxy.proxy.timeout" value="120000"/>
+        <property name="YahsatSLVTProxy.thread.count" value="25"/>
+        <property name="SLVTProxy.proxy.timeout" value="12000"/>
+        <property name="CreateJupiterDeviceProxy.thread.count" value="25"/>
+        <property name="CreateJupiterDeviceProxy.thread.timeout" value="35000"/>
+        <property name="CreateJupiterDeviceProxy.proxy.endpoint" value="http://cspwsserver:8080/CSP_CreateJupiterDeviceService/CreateJupiterDeviceService"/>
+        <property name="JupiterSPQProxy.thread.count" value="25"/>
+        <property name="JupiterSPQProxy.thread.timeout" value="35000"/>
+        <property name="JupiterSPQProxy.proxy.endpoint" value="http://cspwsserver:8080/CSP_JupiterSPQService/JupiterSPQService"/>
+        <property name="ManageJupiterDeviceProxy.thread.count" value="25"/>
+        <property name="ManageJupiterDeviceProxy.proxy.timeout" value="35000"/>
+        <property name="DeviceConfigUpdateProxy.thread.count" value="5"/>
+        <property name="DeviceConfigUpdateProxy.proxy.timeout" value="35000"/>
+        <property name="JupiterSASProxy.thread.count" value="25"/>
+        <property name="JupiterSASProxy.proxy.timeout" value="35000"/>
+        <property name="JupiterTASProxy.thread.count" value="25"/>
+        <property name="JupiterTASProxy.proxy.timeout" value="35000"/>
+        <property name="BSSProxy.thread.count" value="5"/>
+        <property name="BSSProxy.proxy.timeout" value="35000"/>
+        <property name="JupiterTerminalDiagnoseProxy.thread.count" value="25"/>
+        <property name="JupiterTerminalDiagnoseProxy.proxy.timeout" value="35000"/>
+        <property name="JupiterTerminalSearchProxy.thread.count" value="25"/>
+        <property name="JupiterTerminalSearchProxy.proxy.timeout" value="35000"/>
+        <property name="AS_ESB_AUDIT_PARM_LIST" value="deviceID,action,ResponseCd,keepBinding,status,RequestId"/>
+        <property name="WWNMSBSSProxy.thread.count" value="25"/>
+        <property name="WWNMSBSSProxy.proxy.timeout" value="35000"/>
+        <property name="WWNMSProxy.thread.count" value="25"/>
+        <property name="WWNMSProxy.proxy.timeout" value="35000"/>
+        <property name="NMSProxy.thread.count" value="25"/>
+        <property name="NMSProxy.proxy.timeout" value="35000"/>
+        <property name="wwnms_apifrwk_respparam_nmsUrl" value="nmsUrl"/>
+        <property name="wwnms_apifrwk_respparam_status" value="status"/>
+        <property name="wwnms_apifrwk_respparam_httpMethod" value="httpMethod"/>
+        <property name="wwnms_apifrwk_respparam_siteCareOpr" value="siteCareOperation"/>
+        <property name="wwnms_apifrwk_respparam_parentReqId" value="parentReqId"/>
+        <property name="wwnms_apifrwk_respparam_respMsg" value="message"/>
+        <property name="wwnms_apifrwk_rptUrl" value="http://10.100.8.141:8086/SDS/apifrwk/csr/ReportAPIServlet.servlet?requestType=processReport&amp;reportId="/>
+        <property name="wwnms_apifrwk_respparam_resourceId" value="id"/>
+        <property name="resourceType" value="resourceType"/>
+        <property name="errorCode" value="errCd"/>
+        <property name="defaultStatus" value="false"/>
+        <property name="defaultResponseMsg" value="Failed to connect with Email Validation Service"/>
+        <property name="keepBinding" value="keepBinding"/>
+        <property name="messagestore.datasource" value="java:/DSSDataSource"/>
+        <property name="messagestore.dssuser" value="dssadmin"/>
+        <property name="nmsCommunicationMsg" value="Failed to Communicate with World Wide NMS Simulator"/>
+        <property name="exceptionCode" value="999"/>
+        <property name="MsgControllerVANTIVEProxy.authorization.header" value="Basic Y2lyY3VsYXI6b3JiaXQ="/>
+        <property name="MsgControllerRDMTopicProxy.thread.count" value="25"/>
+        <property name="MsgControllerSMProxy.thread.count" value="25"/>
+        <property name="MsgControllerCSPProxy.thread.count" value="25"/>
+        <property name="MsgControllerESMProxy.thread.count" value="25"/>
+        <property name="MsgControllerRDMProxy.thread.count" value="25"/>
+        <property name="MsgControllerCMProxy.thread.count" value="25"/>
+        <property name="MsgControllerULMProxy.thread.count" value="25"/>
+        <property name="MsgControllerKAASProxy.thread.count" value="25"/>
+        <property name="MsgControllerKUASProxy.thread.count" value="25"/>
+        <property name="MsgControllerSPQBAProxy.thread.count" value="25"/>
+        <property name="MsgControllerBAProxy.thread.count" value="25"/>
+        <property name="MsgControllerCRMISProxy.thread.count" value="25"/>
+        <property name="MsgControllerNPCICBFWProxy.thread.count" value="25"/>
+        <property name="MsgControllerPCICBFWProxy.thread.count" value="25"/>
+        <property name="MsgControllerEBFWProxy.thread.count" value="25"/>
+        <property name="MsgControllerBMRProxy.thread.count" value="25"/>
+        <property name="MsgControllerSPQULMProxy.thread.count" value="25"/>
+        <property name="MsgControllerPPSProxy.thread.count" value="25"/>
+        <property name="MsgControllerEBFWProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerSOAAdapterProxy.thread.count" value="25"/>
+        <property name="MsgControllerBATopicProxy.thread.count" value="25"/>
+        <property name="MsgControllerESMTopicProxy.thread.count" value="25"/>
+        <property name="MsgControllerCMTopicProxy.thread.count" value="25"/>
+        <property name="MsgControllerEPUProxy.thread.count" value="25"/>
+        <property name="MsgControllerSSCMProxy.thread.count" value="25"/>
+        <property name="MsgControllerCBRProxy.thread.count" value="25"/>
+        <property name="MsgControllerIPAMProxy.thread.count" value="25"/>
+        <property name="MsgControllerSPQJUASProxy.thread.count" value="25"/>
+        <property name="MsgControllerPCICBFWProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerVISIONProxy.proxy.timeout" value="40000"/>
+        <property name="MsgControllerVISIONProxy.thread.count" value="25"/>
+        <property name="MsgControllerACSProxy.proxy.timeout" value="120000"/>
+        <property name="MsgControllerACSProxy.thread.count" value="25"/>
+        <property name="SSLproxy.keystore.location" value="file:///opt/pop/conf/keystore.jks"/>
+        <property name="SSLproxy.keystore.password" value="Hughes12345"/>
+        <property name="SSLproxy.truststore.location" value="file:///opt/java/jdk1.8.0_91/jre/lib/security/cacerts"/>
+        <property name="SSLproxy.truststore.password" value="changeit"/>
+        <property name="executionTime" value="15"/>
+        <property name="nmsExceptionCode" value="900"/>
+        <property name="delayCount" value="0"/>
+        <property name="AlarmsCompositionFile" value="/opt/pop/conf/ESB_AlarmsComposition.xml"/>
+        <property name="AlarmManagedFile" value="/opt/pop/conf/ESB_AppManagedAlarms.xml"/>
+        <property name="validation.config.file" value="validation-config.xml"/>
+        <property name="CRMproxy.header.username" value="ESB_CRM_USER_NAME"/>
+        <property name="CRMproxy.header.password" value="ESB_CRM_PASSWORD"/>
+        <property name="TransportFeasibilityEXTProxy.proxy.timeout" value="120000"/>
+        <property name="TransportFeasibilityEXTProxy.thread.count" value="25"/>
+        <property name="InternationalBankAccountValidationCOService.endpoint" value="ESB_InternationalBankAccountValidationCOService.endpoint"/>
+        <property name="InternationalCreditCheckCOService.endpoint" value="ESB_InternationalCreditCheckCOService.endpoint"/>
+        <property name="InternationalValidateAddressEXTCOService.endpoint" value="ESB_InternationalValidateAddressEXTCOService.endpoint"/>
+        <property name="InternationalSMSEXTProxy.proxy.endpoint" value="ESB_InternationalValidateAddressEXTCOService.endpoint"/>
+        <property name="tranx_staging_url_lookup_in_napId" value="NapId"/>
+        <property name="tranx_staging_url_lookup_in_tranxType" value="TranxType"/>
+        <property name="tpsfrwk_rpt_out_status" value="status"/>
+        <property name="tpsfrwk_rpt_out_responseMsg" value="responseMsg"/>
+        <property name="tranx_staging_url_lookup_out_tranxStgUrl" value="TranxStgUrl"/>
+        <property name="tranx_staging_url_lookup_rptUrl" value="http://jdssserver:8086/SDS/tpsfrwk/csr/ReportAPIServlet.servlet?requestType=processReport&amp;reportId=1001"/>
+        <property name="http_Timeout" value="60000"/>
+        <property name="tps.datasource" value="java:/PrequalDataSource"/>
+        <property name="covad.url" value="https://xapi-test.covad.com/servlet/MainVCAServlet"/>
+    </system-properties>
+
+
+    <management>
+        <security-realms>
+            <security-realm name="ManagementRealm">
+                <authentication>
+                    <local default-user="$local" skip-group-loading="true"/>
+                    <properties path="mgmt-users.properties" relative-to="jboss.server.config.dir"/>
+                </authentication>
+                <authorization map-groups-to-roles="false">
+                    <properties path="mgmt-groups.properties" relative-to="jboss.server.config.dir"/>
+                </authorization>
+            </security-realm>
+            <security-realm name="ApplicationRealm">
+                <authentication>
+                    <local default-user="$local" allowed-users="*" skip-group-loading="true"/>
+                    <properties path="application-users.properties" relative-to="jboss.server.config.dir"/>
+                </authentication>
+                <authorization>
+                    <properties path="application-roles.properties" relative-to="jboss.server.config.dir"/>
+                </authorization>
+            </security-realm>
+        </security-realms>
+        <audit-log>
+            <formatters>
+                <json-formatter name="json-formatter"/>
+            </formatters>
+            <handlers>
+                <file-handler name="file" formatter="json-formatter" path="audit-log.log" relative-to="jboss.server.data.dir"/>
+            </handlers>
+            <logger log-boot="true" log-read-only="false" enabled="false">
+                <handlers>
+                    <handler name="file"/>
+                </handlers>
+            </logger>
+        </audit-log>
+        <management-interfaces>
+            <native-interface security-realm="ManagementRealm">
+                <socket-binding native="management-native"/>
+            </native-interface>
+            <http-interface security-realm="ManagementRealm">
+                <socket-binding http="management-http"/>
+            </http-interface>
+        </management-interfaces>
+        <access-control provider="simple">
+            <role-mapping>
+                <role name="SuperUser">
+                    <include>
+                        <user name="$local"/>
+                    </include>
+                </role>
+            </role-mapping>
+        </access-control>
+    </management>
+
+    <profile>
+        <subsystem xmlns="urn:jboss:domain:logging:1.5">
+            <console-handler name="CONSOLE">
+                <level name="DEBUG"/>
+                <formatter>
+                    <named-formatter name="COLOR-PATTERN"/>
+                </formatter>
+            </console-handler>
+            <periodic-rotating-file-handler name="FILE" autoflush="true">
+                <formatter>
+                    <named-formatter name="PATTERN"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="server.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler>
+            <size-rotating-file-handler name="ACTHANDLER" autoflush="true">
+                <level name="DEBUG"/>
+                <formatter>
+                    <pattern-formatter pattern="%d %-8p (%-40t) %s%E [%c] %n"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="ESB.log"/>
+                <rotate-size value="20m"/>
+                <max-backup-index value="10"/>
+                <append value="true"/>
+            </size-rotating-file-handler>
+            <logger category="com.arjuna">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.apache.tomcat.util.modeler">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.jboss.as.config">
+                <level name="DEBUG"/>
+            </logger>
+            <logger category="sun.rmi">
+                <level name="WARN"/>
+            </logger>
+            <logger category="jacorb">
+                <level name="WARN"/>
+            </logger>
+            <logger category="jacorb.config">
+                <level name="ERROR"/>
+            </logger>
+            <logger category="org.switchyard">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.apache.camel">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.apache.deltaspike.core.api.provider.BeanManagerProvider">
+                <level name="ERROR"/>
+            </logger>
+            <logger category="com.hughes.bits">
+                <level name="TRACE"/>
+                <handlers>
+                    <handler name="ACTHANDLER"/>
+                </handlers>
+            </logger>
+            <root-logger>
+                <level name="INFO"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILE"/>
+                </handlers>
+            </root-logger>
+            <formatter name="PATTERN">
+                <pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+            </formatter>
+            <formatter name="COLOR-PATTERN">
+                <pattern-formatter pattern="%K{level}%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+            </formatter>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:datasources:1.2">
+            <datasources>
+                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+                    <driver>h2</driver>
+                    <security>
+                        <user-name>sa</user-name>
+                        <password>sa</password>
+                    </security>
+                </datasource>
+                <datasource jta="false" jndi-name="java:/DSSDataSource" pool-name="DSSDataSource" enabled="true" use-ccm="false">
+                    <connection-url>jdbc:oracle:thin:@dssdbt14.iaglab.com:1521:ecom</connection-url>
+                    <driver-class>oracle.jdbc.OracleDriver</driver-class>
+                    <driver>ojdbc6.jar</driver>
+                    <pool>
+                        <min-pool-size>1</min-pool-size>
+                        <max-pool-size>100</max-pool-size>
+                        <prefill>false</prefill>
+                        <use-strict-min>false</use-strict-min>
+                        <flush-strategy>FailingConnectionOnly</flush-strategy>
+                    </pool>
+                    <security>
+                        <user-name>dssuser</user-name>
+                        <password>dsst14</password>
+                    </security>
+                    <validation>
+                        <check-valid-connection-sql>SELECT 1 FROM DUAL</check-valid-connection-sql>
+                        <validate-on-match>true</validate-on-match>
+                        <background-validation>false</background-validation>
+                    </validation>
+                    <timeout>
+                        <set-tx-query-timeout>false</set-tx-query-timeout>
+                        <blocking-timeout-millis>0</blocking-timeout-millis>
+                        <idle-timeout-minutes>0</idle-timeout-minutes>
+                        <query-timeout>0</query-timeout>
+                        <use-try-lock>0</use-try-lock>
+                        <allocation-retry>0</allocation-retry>
+                        <allocation-retry-wait-millis>0</allocation-retry-wait-millis>
+                    </timeout>
+                    <statement>
+                        <share-prepared-statements>false</share-prepared-statements>
+                    </statement>
+                </datasource>
+                <datasource jndi-name="java:/PrequalDataSource" pool-name="PrequalDataSource" enabled="true">
+                    <connection-url>jdbc:oracle:thin:@10.100.10.2:1521/APPDB</connection-url>
+                    <driver-class>oracle.jdbc.OracleDriver</driver-class>
+                    <driver>ojdbc6.jar</driver>
+                    <pool>
+                        <min-pool-size>1</min-pool-size>
+                        <max-pool-size>20</max-pool-size>
+                        <prefill>false</prefill>
+                        <use-strict-min>false</use-strict-min>
+                        <flush-strategy>FailingConnectionOnly</flush-strategy>
+                    </pool>
+                    <security>
+                        <user-name>prequal_user</user-name>
+                        <password>prequal_user</password>
+                    </security>
+                </datasource>
+                <drivers>
+                    <driver name="h2" module="com.h2database.h2">
+                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    </driver>
+                </drivers>
+            </datasources>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:deployment-scanner:1.1">
+            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:ee:1.2">
+            <global-modules>
+                <module name="com.hughes" slot="main"/>
+            </global-modules>
+            <spec-descriptor-property-replacement>false</spec-descriptor-property-replacement>
+            <jboss-descriptor-property-replacement>true</jboss-descriptor-property-replacement>
+            <annotation-property-replacement>false</annotation-property-replacement>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:ejb3:1.5">
+            <session-bean>
+                <stateless>
+                    <bean-instance-pool-ref pool-name="slsb-strict-max-pool"/>
+                </stateless>
+                <stateful default-access-timeout="5000" cache-ref="simple"/>
+                <singleton default-access-timeout="5000"/>
+            </session-bean>
+            <pools>
+                <bean-instance-pools>
+                    <strict-max-pool name="slsb-strict-max-pool" max-pool-size="20" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
+                    <strict-max-pool name="mdb-strict-max-pool" max-pool-size="20" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
+                </bean-instance-pools>
+            </pools>
+            <caches>
+                <cache name="simple" aliases="NoPassivationCache"/>
+                <cache name="passivating" passivation-store-ref="file" aliases="SimpleStatefulCache"/>
+            </caches>
+            <passivation-stores>
+                <file-passivation-store name="file"/>
+            </passivation-stores>
+            <async thread-pool-name="default"/>
+            <timer-service thread-pool-name="default" default-data-store="default-file-store">
+                <data-stores>
+                    <file-data-store name="default-file-store" path="timer-service-data" relative-to="jboss.server.data.dir"/>
+                </data-stores>
+            </timer-service>
+            <remote connector-ref="remoting-connector" thread-pool-name="default"/>
+            <thread-pools>
+                <thread-pool name="default">
+                    <max-threads count="10"/>
+                    <keepalive-time time="100" unit="milliseconds"/>
+                </thread-pool>
+            </thread-pools>
+            <default-security-domain value="other"/>
+            <default-missing-method-permissions-deny-access value="true"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:infinispan:1.5">
+            <cache-container name="web" aliases="standard-session-cache" default-cache="local-web" module="org.jboss.as.clustering.web.infinispan">
+                <local-cache name="local-web" batching="true">
+                    <file-store passivation="false" purge="false"/>
+                </local-cache>
+            </cache-container>
+            <cache-container name="hibernate" default-cache="local-query" module="org.jboss.as.jpa.hibernate:4">
+                <local-cache name="entity">
+                    <transaction mode="NON_XA"/>
+                    <eviction strategy="LRU" max-entries="10000"/>
+                    <expiration max-idle="100000"/>
+                </local-cache>
+                <local-cache name="local-query">
+                    <transaction mode="NONE"/>
+                    <eviction strategy="LRU" max-entries="10000"/>
+                    <expiration max-idle="100000"/>
+                </local-cache>
+                <local-cache name="timestamps">
+                    <transaction mode="NONE"/>
+                    <eviction strategy="NONE"/>
+                </local-cache>
+            </cache-container>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:jaxrs:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:jca:1.1">
+            <archive-validation enabled="true" fail-on-error="true" fail-on-warn="false"/>
+            <bean-validation enabled="true"/>
+            <default-workmanager>
+                <short-running-threads>
+                    <core-threads count="50"/>
+                    <queue-length count="50"/>
+                    <max-threads count="50"/>
+                    <keepalive-time time="10" unit="seconds"/>
+                </short-running-threads>
+                <long-running-threads>
+                    <core-threads count="50"/>
+                    <queue-length count="50"/>
+                    <max-threads count="50"/>
+                    <keepalive-time time="10" unit="seconds"/>
+                </long-running-threads>
+            </default-workmanager>
+            <cached-connection-manager/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:jdr:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:jmx:1.3">
+            <expose-resolved-model/>
+            <expose-expression-model/>
+            <remoting-connector/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:jpa:1.1">
+            <jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:jsf:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:mail:1.2">
+            <mail-session name="default" jndi-name="java:jboss/mail/Default">
+                <smtp-server outbound-socket-binding-ref="mail-smtp"/>
+            </mail-session>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:naming:1.4">
+            <remote-naming/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:pojo:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:remoting:1.2">
+            <connector name="remoting-connector" socket-binding="remoting" security-realm="ApplicationRealm"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:resource-adapters:1.1"/>
+        <subsystem xmlns="urn:jboss:domain:sar:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:security:1.2">
+            <security-domains>
+                <security-domain name="other" cache-type="default">
+                    <authentication>
+                        <login-module code="Remoting" flag="optional">
+                            <module-option name="password-stacking" value="useFirstPass"/>
+                        </login-module>
+                        <login-module code="RealmDirect" flag="required">
+                            <module-option name="password-stacking" value="useFirstPass"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+                <security-domain name="jboss-web-policy" cache-type="default">
+                    <authorization>
+                        <policy-module code="Delegating" flag="required"/>
+                    </authorization>
+                </security-domain>
+                <security-domain name="jboss-ejb-policy" cache-type="default">
+                    <authorization>
+                        <policy-module code="Delegating" flag="required"/>
+                    </authorization>
+                </security-domain>
+                <security-domain name="hawtio-domain" cache-type="default">
+                    <authentication>
+                        <login-module code="RealmDirect" flag="required">
+                            <module-option name="realm" value="ManagementRealm"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+                <security-domain name="bpel-console" cache-type="default">
+                    <authentication>
+                        <login-module code="UsersRoles" flag="required"/>
+                    </authentication>
+                </security-domain>
+                <security-domain name="DSSUserSecurityRealm" cache-type="default">
+                    <authentication>
+                        <login-module code="org.picketbox.datasource.security.SecureIdentityLoginModule" flag="required">
+                            <module-option name="username" value="dssuser"/>
+                            <module-option name="password" value="dsst14"/>
+                            <module-option name="managedConnectionFactoryName" value="jboss.jca:service=LocalTxCM,name=DSSDataSource"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+                <security-domain name="ESBDBAuthSecurityRealm">
+                    <authentication>
+                        <login-module code="org.jboss.security.auth.spi.DatabaseServerLoginModule" flag="required">
+                            <module-option name="dsJndiName" value="java:/DSSDataSource"/>
+                            <module-option name="principalsQuery" value="select password from  ESB_PRINCIPLES where principal_id=?"/>
+                            <module-option name="rolesQuery" value="select user_role, 'Roles' from  ESB_ROLES where  principal_id=?"/>
+                            <module-option name="hashAlgorithm" value="MD5"/>
+                            <module-option name="hashEncoding" value="base64"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+            </security-domains>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:threads:1.1"/>
+        <subsystem xmlns="urn:jboss:domain:transactions:1.5">
+            <core-environment>
+                <process-id>
+                    <uuid/>
+                </process-id>
+            </core-environment>
+            <recovery-environment socket-binding="txn-recovery-environment" status-socket-binding="txn-status-manager"/>
+            <coordinator-environment default-timeout="300"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:web:2.2" default-virtual-server="default-host" native="false">
+            <connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http"/>
+            <connector name="ajp" protocol="AJP/1.3" scheme="http" socket-binding="ajp"/>
+            <virtual-server name="default-host" enable-welcome-root="true">
+                <alias name="localhost"/>
+                <alias name="example.com"/>
+            </virtual-server>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:webservices:1.2">
+            <modify-wsdl-address>true</modify-wsdl-address>
+            <wsdl-host>${jboss.bind.address:0.0.0.0}</wsdl-host>
+            <endpoint-config name="Standard-Endpoint-Config"/>
+            <endpoint-config name="Recording-Endpoint-Config">
+                <pre-handler-chain name="recording-handlers" protocol-bindings="##SOAP11_HTTP ##SOAP11_HTTP_MTOM ##SOAP12_HTTP ##SOAP12_HTTP_MTOM">
+                    <handler name="RecordingHandler" class="org.jboss.ws.common.invocation.RecordingServerHandler"/>
+                </pre-handler-chain>
+            </endpoint-config>
+            <client-config name="Standard-Client-Config"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:weld:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:camel:1.0"/>
+        <subsystem xmlns="urn:jboss:domain:switchyard:1.0">
+            <security-configs/>
+            <modules>
+                <module identifier="org.switchyard.component.bean" implClass="org.switchyard.component.bean.deploy.BeanComponent"/>
+                <module identifier="org.switchyard.component.soap" implClass="org.switchyard.component.soap.deploy.SOAPComponent">
+                    <properties>
+                        <socketAddr>
+                            :18001
+                        </socketAddr>
+                    </properties>
+                </module>
+                <module identifier="org.switchyard.component.camel" implClass="org.switchyard.component.camel.deploy.CamelComponent">
+                    <properties>
+                        <socketAddr>
+                            :18001
+                        </socketAddr>
+                    </properties>
+                </module>
+                <module identifier="org.switchyard.component.camel.atom" implClass="org.switchyard.component.camel.atom.deploy.CamelAtomComponent"/>
+                <module identifier="org.switchyard.component.camel.core" implClass="org.switchyard.component.camel.core.deploy.CamelCoreComponent"/>
+                <module identifier="org.switchyard.component.camel.cxf" implClass="org.switchyard.component.camel.cxf.deploy.CamelCxfComponent"/>
+                <module identifier="org.switchyard.component.camel.file" implClass="org.switchyard.component.camel.file.deploy.CamelFileComponent"/>
+                <module identifier="org.switchyard.component.camel.ftp" implClass="org.switchyard.component.camel.ftp.deploy.CamelFtpComponent"/>
+                <module identifier="org.switchyard.component.camel.jms" implClass="org.switchyard.component.camel.jms.deploy.CamelJmsComponent"/>
+                <module identifier="org.switchyard.component.camel.jpa" implClass="org.switchyard.component.camel.jpa.deploy.CamelJpaComponent"/>
+                <module identifier="org.switchyard.component.camel.mail" implClass="org.switchyard.component.camel.mail.deploy.CamelMailComponent"/>
+                <module identifier="org.switchyard.component.camel.mqtt" implClass="org.switchyard.component.camel.mqtt.deploy.CamelMqttComponent"/>
+                <module identifier="org.switchyard.component.camel.netty" implClass="org.switchyard.component.camel.netty.deploy.CamelNettyComponent"/>
+                <module identifier="org.switchyard.component.camel.quartz" implClass="org.switchyard.component.camel.quartz.deploy.CamelQuartzComponent"/>
+                <module identifier="org.switchyard.component.camel.rss" implClass="org.switchyard.component.camel.rss.deploy.CamelRSSComponent"/>
+                <module identifier="org.switchyard.component.camel.sql" implClass="org.switchyard.component.camel.sql.deploy.CamelSqlComponent"/>
+                <module identifier="org.switchyard.component.bpel" implClass="org.switchyard.component.bpel.deploy.BPELComponent"/>
+                <module identifier="org.switchyard.component.http" implClass="org.switchyard.component.http.deploy.HttpComponent"/>
+                <module identifier="org.switchyard.component.jca" implClass="org.switchyard.component.jca.deploy.JCAComponent"/>
+                <module identifier="org.switchyard.component.sca" implClass="org.switchyard.component.sca.deploy.SCAComponent">
+                    <properties>
+                        <cache-name>
+                            switchyard
+                        </cache-name>
+                    </properties>
+                </module>
+                <module identifier="org.switchyard.component.resteasy" implClass="org.switchyard.component.resteasy.deploy.RESTEasyComponent"/>
+            </modules>
+            <extensions>
+                <extension identifier="org.apache.camel.component.bindy"/>
+                <extension identifier="org.apache.camel.component.hl7"/>
+                <extension identifier="org.apache.camel.component.mina2"/>
+                <extension identifier="org.apache.camel.component.mvel"/>
+                <extension identifier="org.apache.camel.component.ognl"/>
+                <extension identifier="org.apache.camel.component.jaxb"/>
+                <extension identifier="org.apache.camel.component.saxon"/>
+                <extension identifier="org.apache.camel.component.soap"/>
+                <extension identifier="org.apache.camel.component.http"/>
+                <extension identifier="org.apache.camel.component.http4"/>
+                <extension identifier="org.apache.commons.codec"/>
+            </extensions>
+        </subsystem>
+    </profile>
+
+    <interfaces>
+        <interface name="management">
+            <inet-address value="${jboss.bind.address.management:0.0.0.0}"/>
+        </interface>
+        <interface name="public">
+            <inet-address value="${jboss.bind.address:0.0.0.0}"/>
+        </interface>
+        <interface name="unsecure">
+            <inet-address value="${jboss.bind.address.unsecure:0.0.0.0}"/>
+        </interface>
+    </interfaces>
+
+    <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
+        <socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9998}"/>
+        <socket-binding name="management-http" interface="management" port="${jboss.management.http.port:9992}"/>
+        <socket-binding name="management-https" interface="management" port="${jboss.management.https.port:9445}"/>
+        <socket-binding name="ajp" port="8019"/>
+        <socket-binding name="http" port="8080"/>
+        <socket-binding name="https" port="8443"/>
+        <socket-binding name="remoting" port="4442"/>
+        <socket-binding name="txn-recovery-environment" port="4715"/>
+        <socket-binding name="txn-status-manager" port="4716"/>
+        <outbound-socket-binding name="mail-smtp">
+            <remote-destination host="localhost" port="25"/>
+        </outbound-socket-binding>
+    </socket-binding-group>
+
+</server>
