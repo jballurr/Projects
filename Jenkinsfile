@@ -16,3 +16,4 @@ node {
          bat(/"${mvnHome}\bin\mvn" -f TokenVerifier\pom.xml clean install -Dmaven.test.failure.ignore /)
       }
    }
+}
