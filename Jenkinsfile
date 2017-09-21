@@ -18,7 +18,7 @@ node {
    stage ('Build Docker'){
    
       echo 'Building Docker Image'
-      bat "cp target/TokenVerifier.jar ./tmp-docker-build-context"
+      bat "cp TokenVerifier/target/TokenVerifier.jar ./tmp-docker-build-context"
    
    
    }
