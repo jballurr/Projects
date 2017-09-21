@@ -7,7 +7,7 @@ node {
       
       mvnHome = tool 'M3'
    }
-   stage('Build') {
+   stage('Build war') {
       // Run the maven build
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn'  -f TokenVerifier/pom.xml clean install -DskipTests"
@@ -15,4 +15,11 @@ node {
          bat(/"${mvnHome}\bin\mvn" -f TokenVerifier\pom.xml clean install -Dmaven.test.failure.ignore /)
       }
    }
+   stage ('Build Docker'){
+   
+      echo 'Building Docker Image'
+   
+   
+   }
+   
 }
